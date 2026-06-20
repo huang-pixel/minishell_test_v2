@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/20 16:36:02 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/20 17:56:50 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,14 +250,16 @@ int					execute_cmd(t_ast *node, t_shell *shell, int pipe);
 /* Execute child process */
 int					path_error_status(char *exec);
 int					wait_status_code(pid_t pid);
-void				exec_child(char *exec, char *path, char **argv, char **envp);
+int					prepare_exec(char *exec, t_ast *node, t_shell *shell, t_exec_args *args);
+void				exec_child(char *exec, t_exec_args *args);
 int					exec_external(char *exec, t_ast *node, t_shell *shell, int pipe);
 int					external_process(char *exec, t_ast *node, t_shell *shell, int pipe);
 
 /* Bonus */
-int					execute_and(t_ast *node, t_shell *shell);
+/*int					execute_and(t_ast *node, t_shell *shell);
 int					execute_or(t_ast *node, t_shell *shell);
-int					execute_subshell(t_ast *node, t_env **env);
+int					execute_subshell(t_ast *node, t_shell *shell);*/
+
 int					execute_ast(t_ast *node, t_shell *shell, int pipe);
 
 /* Pipes */

@@ -50,23 +50,25 @@ SRCS = \
 	$(DEBUG_DIR)/debug_ast_names.c \
 	$(DEBUG_DIR)/debug_ast_utils.c \
 	$(DEBUG_DIR)/token_debug.c \
-	$(EXEC_DIR)/executor.c \
-	$(EXEC_DIR)/utils.c \
-	$(EXEC_DIR)/environment.c \
-	$(EXEC_DIR)/buildins.c \
-	$(EXEC_DIR)/buildins_utils.c \
-	$(EXEC_DIR)/env_utils.c \
+	$(EXEC_DIR)/buildins_cd.c \
 	$(EXEC_DIR)/buildins_export.c \
+	$(EXEC_DIR)/buildins_utils.c \
+	$(EXEC_DIR)/buildins.c \
 	$(EXEC_DIR)/env_to_execve.c \
+	$(EXEC_DIR)/exec_pipe_utils.c \
+	$(EXEC_DIR)/exec_pipe.c \
+	$(EXEC_DIR)/executor.c \
+	$(EXEC_DIR)/exit_utils.c \
+	$(EXEC_DIR)/export_utils.c \
+	$(EXEC_DIR)/heredoc.c \
+	$(EXEC_DIR)/init_env.c \
+	$(EXEC_DIR)/path.c \
+	$(EXEC_DIR)/pipe_close_free.c \
+	$(EXEC_DIR)/process_utils.c \
 	$(EXEC_DIR)/process.c \
 	$(EXEC_DIR)/redirections.c \
-	$(EXEC_DIR)/cd_utils.c \
-	$(EXEC_DIR)/buildins_cd.c \
-	$(EXEC_DIR)/buildins_exit.c \
-	$(EXEC_DIR)/heredoc.c \
-	$(EXEC_DIR)/exec_pipe.c \
-	$(EXEC_DIR)/exec_and_or.c \
-	$(EXEC_DIR)/exec_subshell.c 
+	$(EXEC_DIR)/shell.c \
+	$(EXEC_DIR)/utils.c 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

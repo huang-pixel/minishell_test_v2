@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 16:49:01 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/07 00:17:33 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/20 18:01:56 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ int	handle_redirs(t_redir *redirs)
             if (dup2(fd, STDOUT_FILENO) < 0)
                 return (close(fd), perror("dup2"), 1);
         }
-        /*if (redirs->type == REDIR_IN && fd != STDIN_FILENO)
-            close(fd);
-        else if (redirs->type == REDIR_OUT && fd != STDOUT_FILENO)
-            close(fd);*/
         if (fd != STDIN_FILENO && fd != STDOUT_FILENO)
             close(fd);
         redirs = redirs->next;

@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 23:39:28 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/03 01:31:48 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/20 17:38:08 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 
  */
 
-int execute_subshell(t_ast *node, t_env **env)
+/*int execute_subshell(t_ast *node, t_shell *shell)
 {
     pid_t   pid;
     int     ret;
@@ -31,7 +31,7 @@ int execute_subshell(t_ast *node, t_env **env)
     if (pid == 0)
     {
         setup_child_signals();
-        execute_ast(node->left, env, 0);
+        execute_ast(node->left, shell, 0);
     }
     setup_parent_wait_signals();
     waitpid(pid, &status, 0);
@@ -39,4 +39,4 @@ int execute_subshell(t_ast *node, t_env **env)
     ret = wait_status_code(status);
     set_last_status(ret);
     return (ret);
-}
+}*/

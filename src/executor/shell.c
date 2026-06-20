@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:50:44 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/19 19:18:33 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/20 18:19:21 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int init_shell(t_shell *shell, char **envp)
 {
     if (!shell)
         return (1);
-    shell->env = init_env(envp);
+    shell->env = build_env(envp);
     if (!shell->env)
         return (1);
     shell->node = NULL;

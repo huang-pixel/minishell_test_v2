@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 00:41:24 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/15 22:47:04 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/20 18:16:37 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ t_pipes *init_pipeline(t_ast *node)
     t_pipes *pipe;
     
     pipe = malloc(sizeof(t_pipes));
-    if (!pipe)
-        return (NULL);
+	if (!pipe)
+		return (NULL);
 	pipe->num_cmd = count_cmds(node);
 	pipe->cmds = malloc(sizeof(t_ast *) * pipe->num_cmd);
 	if (!pipe->cmds)
