@@ -70,7 +70,8 @@ SRCS = \
 	$(EXEC_DIR)/shell.c \
 	$(EXEC_DIR)/utils.c \
 	$(EXEC_DIR)/exec_and_or.c \
-	$(EXEC_DIR)/exec_subshell.c 
+	$(EXEC_DIR)/exec_subshell.c \
+	$(EXEC_DIR)/heredoc_utils.c 
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

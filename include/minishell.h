@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/21 01:55:15 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 00:35:29 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,10 @@ char    			*get_single_str(t_env *env);
 char    			**generate_tab(t_env *env);
 
 /* Heredoc */
+void 				read_loop(char *sep, int *fd);
+void 				heredoc_process(int *fd, char *sep);
+int  				heredoc_child(char *sep);
+int   				check_cmd_hd(t_ast *node);
 int 				prepare_heredoc(t_ast *node);
 int					handle_redirs(t_redir *redirs);
 

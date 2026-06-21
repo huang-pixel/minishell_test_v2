@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/20 17:09:53 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 17:10:12 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 23:08:22 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ int	path_error_status(char *exec)
 	return (1);
 }
 
-int	wait_status_code(pid_t pid)
+int	wait_status_code(int status)
 {
-	int	status;
-	
-	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status))
