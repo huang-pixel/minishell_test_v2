@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/20 17:56:50 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 01:55:15 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,9 +256,9 @@ int					exec_external(char *exec, t_ast *node, t_shell *shell, int pipe);
 int					external_process(char *exec, t_ast *node, t_shell *shell, int pipe);
 
 /* Bonus */
-/*int					execute_and(t_ast *node, t_shell *shell);
+int					execute_and(t_ast *node, t_shell *shell);
 int					execute_or(t_ast *node, t_shell *shell);
-int					execute_subshell(t_ast *node, t_shell *shell);*/
+int					execute_subshell(t_ast *node, t_shell *shell);
 
 int					execute_ast(t_ast *node, t_shell *shell, int pipe);
 

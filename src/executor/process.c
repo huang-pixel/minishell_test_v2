@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 18:41:37 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 17:59:02 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 02:00:27 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	prepare_exec(char *exec, t_ast *node, t_shell *shell, t_exec_args *args)
 	args->path = final_path(exec, shell->env);
 	if (!args->path)
 		return (path_error_status(exec));
+	/*ft_putstr_fd("DEBUG path: ", 2);
+	ft_putstr_fd(args->path ? args->path : "NULL", 2);
+	ft_putstr_fd("\n", 2);*/
 	args->argv = args_list(node->args);
 	if (!args->argv)
 		return (free(args->path), 1);

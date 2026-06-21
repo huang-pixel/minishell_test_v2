@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 12:26:26 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/19 19:18:02 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 01:52:41 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,18 @@ static void	reset_line(t_shell *shell)
 	}
 }
 
-static void	process_line(t_shell *shell)
+static void	process_line(t_shell *shell, int debug_ast)
 {
 	int		status;
 	char	**envp;
 
 	envp = generate_tab(shell->env);
 	expand_ast(shell->node, envp);
+	if (debug_ast)
+	{
+		printf("EXPANDED AST\n");
+		print_ast(shell->node, 0);
+	}
 	free_words(envp);
 	if (prepare_heredoc(shell->node))
 	{
@@ -118,6 +123,11 @@ static int	prepare_line(char *line, t_shell *shell, int debug_ast)
 	{
 		set_shell_status(shell, 2);
 		return (0);
+	}
+	if (debug_ast)
+	{
+		printf("TOKENS\n");
+		print_tokens(shell->tokens);
 	}
 	shell->node = parser(shell->tokens);
 	if (!shell->node)
@@ -165,7 +175,7 @@ static void	shell_loop(char **envp, int debug_ast)
 		if (*line)
 		{
 			if (prepare_line(line, &shell, debug_ast))
-				process_line(&shell);	
+				process_line(&shell, debug_ast);	
 		}
 		reset_line(&shell);
 		free(line);

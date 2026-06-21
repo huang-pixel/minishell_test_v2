@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 23:39:28 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 17:38:08 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 01:58:58 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 
  */
 
-/*int execute_subshell(t_ast *node, t_shell *shell)
+int execute_subshell(t_ast *node, t_shell *shell)
 {
     pid_t   pid;
     int     ret;
@@ -37,6 +37,6 @@
     waitpid(pid, &status, 0);
     setup_interactive_signals();
     ret = wait_status_code(status);
-    set_last_status(ret);
+    set_shell_status(shell, ret);
     return (ret);
-}*/
+}

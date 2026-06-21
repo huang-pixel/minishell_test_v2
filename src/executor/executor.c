@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 20:34:47 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 17:37:59 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/21 01:59:16 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int	execute_cmd(t_ast *node, t_shell *shell, int pipe)
 	if (!node->args)
 		return (0);
 	exec = node->args->value;
+	/*ft_putstr_fd("DEBUG exec: [", 2);
+    ft_putstr_fd(exec, 2);
+    ft_putstr_fd("]\n", 2);*/
 	if (is_builtin(exec))
 	{
 		if (pipe)
@@ -113,11 +116,11 @@ int	execute_ast(t_ast *node, t_shell *shell, int pipe)
 		return (execute_cmd(node, shell, pipe));
 	if (node->type == NODE_PIPE)
 		return (execute_pipe(node, shell));
-	/*if (node->type == NODE_AND)
+	if (node->type == NODE_AND)
 		return (execute_and(node, shell));
 	if (node->type == NODE_OR)
 		return (execute_or(node, shell));
 	if (node->type == NODE_SUBSHELL)
-		return (execute_subshell(node, shell));*/
+		return (execute_subshell(node, shell));
 	return (1);
 }
