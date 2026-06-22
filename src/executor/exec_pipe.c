@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 16:13:20 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 18:30:44 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 01:29:39 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	generate_fork(t_pipes *p)
 {
 	int	i;
 
+	setup_parent_wait_signals();
 	i = 0;
 	while (i < p->num_cmd)
 	{
@@ -61,6 +62,7 @@ int	generate_fork(t_pipes *p)
 			perror("fork");
 			while (i > 0)
 				waitpid(p->pids[--i], NULL, 0);
+			setup_interactive_signals();
 			return (1);
 		}
 		if (p->pids[i] == 0)
@@ -112,6 +114,7 @@ int	execute_pipe(t_ast *node, t_shell *shell)
 	}
 	close_all_fds(p);
 	status = wait_pipe_status(p);
+	setup_interactive_signals();
 	set_shell_status(shell, status);
 	free_pipeline(p);
 	return (status);

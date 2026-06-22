@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 18:41:37 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/21 23:08:53 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 01:24:47 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,16 @@ int	exec_external(char *exec, t_ast *node, t_shell *shell, int pipe)
 		exec_child(exec, &args);
 	pid = fork();
 	if (pid == 0)
-		exec_child(exec, &args);
+	{
+		setup_child_signals();
+		exec_child(exec, &args);	
+	}
 	free(args.path);
 	free_words(args.argv);
 	free_words(args.envp);
+	setup_parent_wait_signals();
 	waitpid(pid, &status, 0);
+	setup_interactive_signals();
 	return (wait_status_code(status));
 }
 
