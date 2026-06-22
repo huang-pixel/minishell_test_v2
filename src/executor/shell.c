@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:50:44 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/20 18:19:21 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 16:35:11 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int init_shell(t_shell *shell, char **envp)
     shell->tokens = NULL;
     shell->last_status = 0;
     shell->main = 1;
+    shell->saved_stdin = -1;
+    shell->saved_stdout = -1;
     return (0);
 }
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/13 18:41:37 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/22 01:24:47 by hhuang2          ###   ########.fr       */
+/*   Created: 2026/06/22 15:51:05 by hhuang2           #+#    #+#             */
+/*   Updated: 2026/06/22 16:37:59 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  *
  * A execve parameters helper
- * 
+ *
  */
 
 int	prepare_exec(char *exec, t_ast *node, t_shell *shell, t_exec_args *args)
@@ -59,7 +59,7 @@ int	exec_external(char *exec, t_ast *node, t_shell *shell, int pipe)
 	if (pid == 0)
 	{
 		setup_child_signals();
-		exec_child(exec, &args);	
+		exec_child(exec, &args);
 	}
 	free(args.path);
 	free_words(args.argv);
@@ -84,24 +84,24 @@ int	external_process(char *exec, t_ast *node, t_shell *shell, int pipe)
 /*
  *
  * This is for all builtins cmd execution
- * 
+ *
  */
 
 int	exec_cmd_parent(char *exec, t_ast *node, t_shell *shell)
 {
-	int	fd_in;
-	int	fd_out;
-	int	status;
-	
-	fd_in = dup(STDIN_FILENO);
-	fd_out = dup(STDOUT_FILENO);
+	int status;
+
+	shell->saved_stdin = dup(STDIN_FILENO);
+	shell->saved_stdout = dup(STDOUT_FILENO);
 	status = handle_redirs(node->redirs);
 	if (!status)
 		status = exec_builtin(exec, node, shell);
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
-	close(fd_in);
-	close(fd_out);
+	dup2(shell->saved_stdin, STDIN_FILENO);
+	dup2(shell->saved_stdout, STDOUT_FILENO);
+	close(shell->saved_stdin);
+	close(shell->saved_stdout);
+	shell->saved_stdin = -1;
+	shell->saved_stdout = -1;
 	set_shell_status(shell, status);
 	return (status);
 }

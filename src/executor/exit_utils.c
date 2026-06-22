@@ -6,11 +6,24 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 18:48:26 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/15 23:29:20 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 17:23:08 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void    close_saved_fds(t_shell *shell)
+{
+    if (shell->saved_stdin != -1)
+    {
+        dup2(shell->saved_stdin, STDIN_FILENO);
+        dup2(shell->saved_stdout, STDOUT_FILENO);
+        close(shell->saved_stdin);
+        close(shell->saved_stdout);
+        shell->saved_stdin = -1;
+        shell->saved_stdout = -1;
+    }
+}
 
 void    exit_free(char **args, t_shell *shell)
 {
@@ -25,6 +38,7 @@ void    exit_numeric_msg(char **args, t_shell *shell)
 	ft_putstr_fd(args[1], 2);
     ft_putstr_fd(": numeric argument required\n", 2);
     exit_free(args, shell);
+    close_saved_fds(shell);
     exit(2);
 }
 

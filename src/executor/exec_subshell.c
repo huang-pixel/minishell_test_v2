@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 23:39:28 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/22 01:49:53 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 17:40:58 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int execute_subshell(t_ast *node, t_shell *shell)
         return (perror("fork"), 1);
     if (pid == 0)
     {
-        int r = execute_ast(node->left, shell, 0);
-        close(STDIN_FILENO);
-        close(STDOUT_FILENO);
-        close(STDERR_FILENO);
-        exit(r);
+        setup_child_signals();
+        shell->main = 0;
+        ret = execute_ast(node->left, shell, 0);
+        exit(ret);
     }
     setup_parent_wait_signals();
     waitpid(pid, &status, 0);

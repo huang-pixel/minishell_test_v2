@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/22 15:42:33 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 17:21:32 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_shell
 	t_token	*tokens;
 	int		last_status;
 	int		main;
+	int		saved_stdin;
+	int		saved_stdout;
 }			t_shell;
 
 typedef struct s_pipes
@@ -222,6 +224,7 @@ void				delete_env_var(t_env **env, char *str);
 int					exec_unset(t_shell *shell, t_ast *node);
 
 /* Exit */
+void    			close_saved_fds(t_shell *shell);
 void    			exit_free(char **args, t_shell *shell);
 int  				is_numeric(char *str);
 int  				ft_atol(char *str, long long *nb);

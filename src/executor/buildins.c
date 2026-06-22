@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 18:14:20 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/19 18:59:33 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 17:24:21 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int	exec_exit(t_ast *node, t_shell *shell)
     if (!argv[1])
     {
         exit_free(argv, shell);
+		close_saved_fds(shell);
         exit(shell->last_status);
     }
     if (!is_numeric(argv[1]) || !ft_atol(argv[1], &n))
@@ -142,5 +143,6 @@ int	exec_exit(t_ast *node, t_shell *shell)
     }
     num = (unsigned char)n;
     exit_free(argv, shell);
+	close_saved_fds(shell);
     exit(num);
 }
