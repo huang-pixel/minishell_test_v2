@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/22 00:35:29 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/22 15:42:33 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,6 @@ int   				check_cmd_hd(t_ast *node);
 int 				prepare_heredoc(t_ast *node);
 int					handle_redirs(t_redir *redirs);
 
-int					wait_status_code(int status);
-
 /* Convert node into argv list */
 int					count_args(t_arg *args);
 char				**args_list(t_arg *args);
@@ -251,9 +249,11 @@ int					is_builtin(char *cmd);
 int					exec_cmd_parent(char *exec, t_ast *node, t_shell *shell);
 int					execute_cmd(t_ast *node, t_shell *shell, int pipe);
 
+int					execute_ast(t_ast *node, t_shell *shell, int pipe);
+
 /* Execute child process */
 int					path_error_status(char *exec);
-int					wait_status_code(pid_t pid);
+int					wait_status_code(int status);
 int					prepare_exec(char *exec, t_ast *node, t_shell *shell, t_exec_args *args);
 void				exec_child(char *exec, t_exec_args *args);
 int					exec_external(char *exec, t_ast *node, t_shell *shell, int pipe);
@@ -263,8 +263,6 @@ int					external_process(char *exec, t_ast *node, t_shell *shell, int pipe);
 int					execute_and(t_ast *node, t_shell *shell);
 int					execute_or(t_ast *node, t_shell *shell);
 int					execute_subshell(t_ast *node, t_shell *shell);
-
-int					execute_ast(t_ast *node, t_shell *shell, int pipe);
 
 /* Pipes */
 int					count_cmds(t_ast *node);
