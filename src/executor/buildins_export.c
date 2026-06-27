@@ -6,26 +6,11 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:43:50 by hhuang2           #+#    #+#             */
-/*   Updated: 2026/06/25 17:31:06 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/28 00:21:09 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static int	export_is_append(char *str)
-{
-	char	*tmp;
-
-	tmp = ft_strchr(str, '=');
-	return (tmp && tmp > str && *(tmp - 1) == '+');
-}
-
-static void	print_error_export(char *str)
-{
-	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-}
 
 /*
  *
@@ -35,22 +20,61 @@ static void	print_error_export(char *str)
  *
  */
 
-static void	print_export(t_env *env)
+/*static void print_export(t_env *env)
 {
-	int		i;
-	t_env	**tab;
+   while (env)
+   {
+    if (env->value)
+    {
+        ft_putstr_fd("declare -x ", STDOUT_FILENO);
+        ft_putstr_fd(env->key, STDOUT_FILENO);
+        ft_putchar_fd('=', STDOUT_FILENO);
+        ft_putstr_fd("\"", STDOUT_FILENO);
+        ft_putstr_fd(env->value, STDOUT_FILENO);
+        ft_putstr_fd("\"", STDOUT_FILENO);
+        ft_putchar_fd('\n', STDOUT_FILENO);
+    }
+    else
+    {
+        ft_putstr_fd("declare -x ", STDOUT_FILENO);
+        ft_putstr_fd(env->key, STDOUT_FILENO);
+        ft_putchar_fd('\n', STDOUT_FILENO);
+    }
+     env = env->next;
+   }
+}*/
 
-	tab = collect_items(env);
-	if (!tab)
-		return ;
-	sort_items(tab);
-	i = 0;
-	while (tab[i])
-	{
-		print_export_entry(tab[i]);
-		i++;
-	}
-	free(tab);
+/*
+ *
+ * Export can display all variables, even export without args
+ * export TEST, should show TEST
+ * this is where it differ from env
+ *
+ */
+
+static void     print_export(t_env *env)
+{
+        int             i;
+        t_env   **tab;
+
+        tab = collect_items(env);
+        if (!tab)
+                return ;
+        sort_items(tab);
+        i = 0;
+        while (tab[i])
+        {
+                print_export_entry(tab[i]);
+                i++;
+        }
+        free(tab);
+}
+
+static void	print_error_export(char *str)
+{
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 }
 
 int	extract_export(t_arg *arg, t_env **env)
@@ -69,8 +93,6 @@ int	extract_export(t_arg *arg, t_env **env)
 			print_error_export(key);
 			status = 1;
 		}
-		else if (export_is_append(arg->value))
-			append_env_val(env, key, value);
 		else
 			set_env_val(env, key, value);
 		free(key);

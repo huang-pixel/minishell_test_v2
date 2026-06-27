@@ -6,7 +6,7 @@
 /*   By: hhuang2 <hhuang2@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 12:00:03 by kexu              #+#    #+#             */
-/*   Updated: 2026/06/22 17:21:32 by hhuang2          ###   ########.fr       */
+/*   Updated: 2026/06/28 00:19:30 by hhuang2          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,10 @@ char    			*cd_path(t_ast *node, t_env **env);
 int 				exec_cd(t_ast *node, t_env **env);
 
 /* Export */
+void				fill_node(t_env *env, t_env **tab);
+t_env				**collect_items(t_env *env);
+void				sort_items(t_env **tab);
+void				print_export_entry(t_env *node);
 t_env   			*last_env_node(t_env *env);
 void    			append_new_node(t_env **env, char *key, char *val);
 void				set_env_val(t_env **env, char *key, char *val);
